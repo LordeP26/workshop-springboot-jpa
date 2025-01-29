@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +28,7 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
+	@JsonIgnore //para não loopar as infos relacionadas // ao usar o jsonIgnore  na classe User, quando chamar um Order ele mostrará os users relacionados ao order
 	@OneToMany(mappedBy = "client")//mappedBy para referenciar onde esta na outra classe
 	private List<Order> orders = new ArrayList<>();
 	
