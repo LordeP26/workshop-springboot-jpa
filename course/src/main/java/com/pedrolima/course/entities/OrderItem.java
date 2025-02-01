@@ -3,6 +3,7 @@ package com.pedrolima.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pedrolima.course.entities.pk.OrderItemPK;
 
 import jakarta.persistence.EmbeddedId;
@@ -16,7 +17,7 @@ public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId //usado pq eh um id composto
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK(); //tem que stanciar se não retorna null
 	
 	private Integer quantity;
 	private Double price;
@@ -34,6 +35,7 @@ public class OrderItem implements Serializable{
 		this.price = price;
 	}
 	
+	@JsonIgnore //no java ee oq conta eh o get
 	public Order getOrder() {
 		return id.getOrder();	
 	}
@@ -41,6 +43,7 @@ public class OrderItem implements Serializable{
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
+	
 	
 	public Product getProduct() {
 		return id.getProduct();	
